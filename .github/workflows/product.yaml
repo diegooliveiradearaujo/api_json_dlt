@@ -1,0 +1,59 @@
+name: workflow_product
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"  
+  workflow_dispatch:      
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Update json/product_api.json
+        run: |
+          echo '[
+                {"product_id":1,"product_name":"Wireless Headphones","sku":"WH-1001","category":"Electronics","sub_category":"Audio","brand":"Sony","model_year":2023},
+                {"product_id":2,"product_name":"Smartphone","sku":"SP-2002","category":"Electronics","sub_category":"Mobile","brand":"Samsung","model_year":2024},
+                {"product_id":3,"product_name":"Laptop","sku":"LP-3003","category":"Computers","sub_category":"Notebooks","brand":"Dell","model_year":2023},
+                {"product_id":4,"product_name":"Smartwatch","sku":"SW-4004","category":"Electronics","sub_category":"Wearables","brand":"Apple","model_year":2025},
+                {"product_id":5,"product_name":"Bluetooth Speaker","sku":"BS-5005","category":"Electronics","sub_category":"Audio","brand":"JBL","model_year":2022},
+                {"product_id":6,"product_name":"Tablet","sku":"TB-6006","category":"Electronics","sub_category":"Mobile","brand":"Lenovo","model_year":2024},
+                {"product_id":7,"product_name":"Desktop Monitor","sku":"DM-7007","category":"Computers","sub_category":"Displays","brand":"LG","model_year":2023},
+                {"product_id":8,"product_name":"Mechanical Keyboard","sku":"MK-8008","category":"Computers","sub_category":"Accessories","brand":"Logitech","model_year":2023},
+                {"product_id":9,"product_name":"Gaming Mouse","sku":"GM-9009","category":"Computers","sub_category":"Accessories","brand":"Razer","model_year":2024},
+                {"product_id":10,"product_name":"Webcam","sku":"WC-1010","category":"Electronics","sub_category":"Video","brand":"Microsoft","model_year":2022},
+                {"product_id":11,"product_name":"Portable SSD","sku":"PS-1111","category":"Storage","sub_category":"External Drives","brand":"SanDisk","model_year":2024},
+                {"product_id":12,"product_name":"USB Flash Drive","sku":"UF-1212","category":"Storage","sub_category":"External Drives","brand":"Kingston","model_year":2023},
+                {"product_id":13,"product_name":"Wireless Charger","sku":"WC-1313","category":"Electronics","sub_category":"Chargers","brand":"Anker","model_year":2024},
+                {"product_id":14,"product_name":"Noise Cancelling Earbuds","sku":"NE-1414","category":"Electronics","sub_category":"Audio","brand":"Bose","model_year":2025},
+                {"product_id":15,"product_name":"Smart TV","sku":"ST-1515","category":"Electronics","sub_category":"Video","brand":"Philips","model_year":2023},
+                {"product_id":16,"product_name":"Router","sku":"RT-1616","category":"Networking","sub_category":"WiFi","brand":"TP-Link","model_year":2023},
+                {"product_id":17,"product_name":"Power Bank","sku":"PB-1717","category":"Electronics","sub_category":"Chargers","brand":"Xiaomi","model_year":2024},
+                {"product_id":18,"product_name":"Drone","sku":"DR-1818","category":"Electronics","sub_category":"Cameras","brand":"DJI","model_year":2024},
+                {"product_id":19,"product_name":"Action Camera","sku":"AC-1919","category":"Cameras","sub_category":"Video","brand":"GoPro","model_year":2023},
+                {"product_id":20,"product_name":"VR Headset","sku":"VR-2020","category":"Electronics","sub_category":"Gaming","brand":"Meta","model_year":2025},
+                {"product_id":21,"product_name":"Smart Home Hub","sku":"SH-2121","category":"Home","sub_category":"Automation","brand":"Amazon","model_year":2023},
+                {"product_id":22,"product_name":"3D Printer","sku":"PR-2222","category":"Electronics","sub_category":"Printing","brand":"Creality","model_year":2024},
+                {"product_id":23,"product_name":"External Hard Drive","sku":"EH-2323","category":"Storage","sub_category":"External Drives","brand":"Western Digital","model_year":2023},
+                {"product_id":24,"product_name":"Smart Thermostat","sku":"ST-2424","category":"Home","sub_category":"Automation","brand":"Tado","model_year":2025},
+                {"product_id":25,"product_name":"Robot Vacuum","sku":"RV-2525","category":"Home","sub_category":"Appliances","brand":"iRobot","model_year":2024},
+                {"product_id":26,"product_name":"Wireless Microphone","sku":"WM-2626","category":"Audio","sub_category":"Recording","brand":"Shure","model_year":2023},
+                {"product_id":27,"product_name":"Graphic Tablet","sku":"GT-2727","category":"Computers","sub_category":"Accessories","brand":"Wacom","model_year":2024},
+                {"product_id":28,"product_name":"Electric Scooter","sku":"ES-2828","category":"Transport","sub_category":"Urban Mobility","brand":"Segway","model_year":2024},
+                {"product_id":29,"product_name":"Dash Camera","sku":"DC-2929","category":"Cameras","sub_category":"Automotive","brand":"Nextbase","model_year":2023},
+                {"product_id":30,"product_name":"LED Desk Lamp","sku":"LD-3030","category":"Home","sub_category":"Lighting","brand":"Philips","model_year":2022}
+              ]' > json/product_api.json
+
+      - name: Commit and push changes
+        run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add json/product_api.json
+            git commit -m "Auto-update JSON [$(date)]" || echo "No changes to commit"
+            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
