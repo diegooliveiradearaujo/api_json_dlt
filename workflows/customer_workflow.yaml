@@ -1,0 +1,47 @@
+name: Update Users JSON
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"  
+  workflow_dispatch:      
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Update json/customer_api.json
+        run: |
+          echo '[
+          {"customer_id":1,"customer_name":"Anna Müller","email":"anna.mueller@example.com","gender":"Female","birth_date":"1992-03-14","region":"Berlin","neighborhood":"Kreuzberg"},
+          {"customer_id":2,"customer_name":"Jonas Schneider","email":"jonas.schneider@example.com","gender":"Male","birth_date":"1988-07-29","region":"Hamburg","neighborhood":"Altona"},
+          {"customer_id":3,"customer_name":"Lisa Weber","email":"lisa.weber@example.com","gender":"Female","birth_date":"1996-11-02","region":"Munich","neighborhood":"Schwabing"},
+          {"customer_id":4,"customer_name":"Tom Becker","email":"tom.becker@example.com","gender":"Male","birth_date":"1990-05-21","region":"Cologne","neighborhood":"Ehrenfeld"},
+          {"customer_id":5,"customer_name":"Sophie Wagner","email":"sophie.wagner@example.com","gender":"Female","birth_date":"1998-09-10","region":"Frankfurt","neighborhood":"Sachsenhausen"},
+          {"customer_id":6,"customer_name":"Paul Fischer","email":"paul.fischer@example.com","gender":"Male","birth_date":"1985-12-18","region":"Stuttgart","neighborhood":"Bad Cannstatt"},
+          {"customer_id":7,"customer_name":"Laura Hoffmann","email":"laura.hoffmann@example.com","gender":"Female","birth_date":"1993-02-07","region":"Düsseldorf","neighborhood":"Pempelfort"},
+          {"customer_id":8,"customer_name":"Max Koch","email":"max.koch@example.com","gender":"Male","birth_date":"1989-08-24","region":"Leipzig","neighborhood":"Plagwitz"},
+          {"customer_id":9,"customer_name":"Julia Richter","email":"julia.richter@example.com","gender":"Female","birth_date":"1994-01-16","region":"Dresden","neighborhood":"Neustadt"},
+          {"customer_id":10,"customer_name":"Tim Wolf","email":"tim.wolf@example.com","gender":"Male","birth_date":"1991-06-03","region":"Hannover","neighborhood":"Linden"},
+          {"customer_id":11,"customer_name":"Lena Neumann","email":"lena.neumann@example.com","gender":"Female","birth_date":"1997-04-12","region":"Nuremberg","neighborhood":"Gostenhof"},
+          {"customer_id":12,"customer_name":"Felix Braun","email":"felix.braun@example.com","gender":"Male","birth_date":"1986-09-19","region":"Bremen","neighborhood":"Schwachhausen"},
+          {"customer_id":13,"customer_name":"Clara Schröder","email":"clara.schroeder@example.com","gender":"Female","birth_date":"1993-11-27","region":"Essen","neighborhood":"Rüttenscheid"},
+          {"customer_id":14,"customer_name":"Nico Zimmermann","email":"nico.zimmermann@example.com","gender":"Male","birth_date":"1995-05-06","region":"Dortmund","neighborhood":"Innenstadt-Nord"},
+          {"customer_id":15,"customer_name":"Marie Schäfer","email":"marie.schaefer@example.com","gender":"Female","birth_date":"1999-07-25","region":"Bonn","neighborhood":"Beuel"},
+          {"customer_id":16,"customer_name":"Lukas Krause","email":"lukas.krause@example.com","gender":"Male","birth_date":"1990-10-14","region":"Mannheim","neighborhood":"Neckarstadt"},
+          {"customer_id":17,"customer_name":"Lea Lehmann","email":"lea.lehmann@example.com","gender":"Female","birth_date":"1998-12-09","region":"Freiburg","neighborhood":"Wiehre"},
+          {"customer_id":18,"customer_name":"Jan Hartmann","email":"jan.hartmann@example.com","gender":"Male","birth_date":"1987-03-22","region":"Karlsruhe","neighborhood":"Durlach"},
+          {"customer_id":19,"customer_name":"Emma Lange","email":"emma.lange@example.com","gender":"Female","birth_date":"2000-06-30","region":"Heidelberg","neighborhood":"Altstadt"},
+          {"customer_id":20,"customer_name":"Daniel Meier","email":"daniel.meier@example.com","gender":"Male","birth_date":"1989-02-17","region":"Augsburg","neighborhood":"Göggingen"}
+]
+' > user.json
+
+      - name: Commit and push changes
+        run: |
+            git config user.name "github-actions"
+            git config user.email "actions@github.com"
+            git add data/users.json
+            git commit -m "Auto update users.json"
+            git push
