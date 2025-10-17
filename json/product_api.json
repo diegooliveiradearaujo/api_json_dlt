@@ -28,5 +28,6 @@
       {"product_id":27,"product_name":"Graphic Tablet","sku":"GT-2727","category":"Computers","sub_category":"Accessories","brand":"Wacom","model_year":2024},
       {"product_id":28,"product_name":"Electric Scooter","sku":"ES-2828","category":"Transport","sub_category":"Urban Mobility","brand":"Segway","model_year":2024},
       {"product_id":29,"product_name":"Dash Camera","sku":"DC-2929","category":"Cameras","sub_category":"Automotive","brand":"Nextbase","model_year":2023},
+      {"product_id":29,"product_name":"Dash Camera","sku":"DC-2929","category":"Cameras","sub_category":"Automotive","brand":"Nextbase","model_year":2023},
       {"product_id":30,"product_name":"LED Desk Lamp","sku":"LD-3030","category":"Home","sub_category":"Lighting","brand":"Philips","model_year":2022}
     ]
