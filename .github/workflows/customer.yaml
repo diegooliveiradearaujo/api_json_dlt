@@ -35,12 +35,12 @@ jobs:
           {"customer_id":18,"customer_name":"Jan Hartmann","email":"jan.hartmann@example.com","gender":"Male","birth_date":"1987-03-22","region":"Karlsruhe","neighborhood":"Durlach"},
           {"customer_id":19,"customer_name":"Emma Lange","email":"emma.lange@example.com","gender":"Female","birth_date":"2000-06-30","region":"Heidelberg","neighborhood":"Altstadt"},
           {"customer_id":20,"customer_name":"Daniel Meier","email":"daniel.meier@example.com","gender":"Male","birth_date":"1989-02-17","region":"Augsburg","neighborhood":"Göggingen"}
-          ]' > customer_api.json
+          ]' > json/customer_api.json
 
       - name: Commit and push changes
         run: |
             git config user.name "github-actions"
             git config user.email "actions@github.com"
-            git add data/users.json
-            git commit -m "Auto update users.json"
+            git add json/customer_api.json
+            git commit -m "Auto update json/customer_api.json"
             git push
