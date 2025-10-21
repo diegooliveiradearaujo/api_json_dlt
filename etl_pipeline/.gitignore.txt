@@ -1,0 +1,23 @@
+#environment variables
+.env
+
+#dlt cache, state, and temporary files
+.dlt/
+
+#python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+#virtual environments
+.venv/
+env/
+venv/
+
+#logs
+*.log
+
+#os files
+.DS_Store
+Thumbs.db
