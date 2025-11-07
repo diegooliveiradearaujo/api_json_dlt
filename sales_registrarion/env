@@ -1,5 +1,0 @@
-postgres_user=sales_data_system_user
-postgres_password=VUBLVHWgTvFbBrhmIfEu0ktSkYm1Vvte
-postgres_host=dpg-d3og95je5dus73anodag-a.oregon-postgres.render.com
-postgres_port=5432
-postgres_db=sales_data_system
