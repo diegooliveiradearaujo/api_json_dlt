@@ -4,11 +4,10 @@ from sqlalchemy import create_engine, text
 import dlt
 
 # Engine para log no Postgres local
-engine_log = create_engine(
-    f"postgresql+psycopg2://{dlt.secrets['local_postgres.destination.postgres.credentials']['username']}:"
-    f"{dlt.secrets['local_postgres.destination.postgres.credentials']['password']}@"
-    f"{dlt.secrets['local_postgres.destination.postgres.credentials']['host']}:5432/"
-    f"{dlt.secrets['local_postgres.destination.postgres.credentials']['database']}"
+engine_log = create_engine(f"postgresql+psycopg2://{dlt.secrets['local_postgres_bronze.destination.postgres.credentials']['username']}:"
+    f"{dlt.secrets['local_postgres_bronze.destination.postgres.credentials']['password']}@"
+    f"{dlt.secrets['local_postgres_bronze.destination.postgres.credentials']['host']}:5432/"
+    f"{dlt.secrets['local_postgres_bronze.destination.postgres.credentials']['database']}"
 )
 
 # Função de retry genérica
